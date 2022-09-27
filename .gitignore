@@ -1,0 +1,11 @@
+.DS_Store
+.idea
+venv/
+.pytest_cache/
+.env
+pytest.ini
+*.pyc
+pages_stop
+stop_tests
+geckodriver.log
+
