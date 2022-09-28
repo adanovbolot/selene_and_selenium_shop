@@ -1,4 +1,3 @@
-import time
 import pytest
 from pom.HomePage import HomePage
 
@@ -32,3 +31,10 @@ class TestHomePage:
         for index in range(8):
             home_page_nav.get_catalog_product()[index].click()
             home_page_nav.driver.back()
+
+    def test_search_write(self):
+        home_page_nav = HomePage(self.driver)
+        home_page_nav.search_product()
+
+
+

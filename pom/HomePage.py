@@ -15,10 +15,10 @@ class HomePage(SeleniumBase):
         self.NAV_LINK_TEXT = 'Главная,О магазине,Гарантия,Доставка,Кредит,Онлайн кредит,FAQ,Контакты,O!'
         self.__CATALOG_PRODUCT = '#leftMenu > li'
         self.CATALOG_EXPECTED_TEXT_PRODUCT = 'Мобильные телефоны,Устройства О!,Аксессуары,Сумки,Часы,SIM-карты O!,Гаджеты,Электросамокаты'
+        self.__SEARCH = '//input[@id="searchQuery"]'
 
     def get_nav_links(self) -> List[WebElement]:
         return self.are_visible('css', self.__NAV_LINKS, 'Header Navigation Links')
-
 
     def get_nav_links_text(self) -> str:
         nav_links = self.get_nav_links()
@@ -40,3 +40,7 @@ class HomePage(SeleniumBase):
     def get_catalog_by_name(self, name) -> WebElement:
         elements = self.get_catalog_product()
         return self.get_elemet_by_text(elements, name)
+
+    def search_product(self):
+        return self.is_present('xpath', self.__SEARCH, 'False')
+

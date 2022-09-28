@@ -41,9 +41,16 @@ class SeleniumBase:
     def are_present(self, find_by: str, locator: str, locator_name: str = None) -> List[WebElement]:
         return self.__wait.until(ec.presence_of_all_elements_located((self.__get_selenium_by(find_by), locator)), locator_name)
 
-    def get_text_from_webelements(self, elements: List[WebElement]) -> List[str]:
+    @staticmethod
+    def get_text_from_webelements(elements: List[WebElement]) -> List[str]:
         return [element.text for element in elements]
 
-    def get_elemet_by_text(self, elements: List[WebElement], name: str) -> WebElement:
+    @staticmethod
+    def get_elemet_by_text(elements: List[WebElement], name: str) -> WebElement:
         name = name.lower()
         return [element for element in elements if element.text.lower() == name][0]
+
+    # @staticmethod
+    # def write_search(element, text: str):
+    #     return element.send_keys(text)
+    #
