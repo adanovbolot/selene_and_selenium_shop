@@ -26,7 +26,9 @@ class TestHomePage:
         expected_links = home_page_nav.CATALOG_EXPECTED_TEXT_PRODUCT
         assert actual_catalog_products == expected_links, f"\nВЕРНУЛ: \n {actual_catalog_products}"
 
+    @pytest.mark.skip
     def test_click_catalog_product(self):
         home_page_nav = HomePage(self.driver)
-        home_page_nav.get_catalog_product()[0].click()
-        time.sleep(2)
+        for index in range(8):
+            home_page_nav.get_catalog_product()[index].click()
+            home_page_nav.driver.back()
