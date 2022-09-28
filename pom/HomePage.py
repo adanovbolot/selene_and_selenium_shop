@@ -1,9 +1,9 @@
 from typing import List
-
 import pytest
-
 from base.seleniumbase import SeleniumBase
 from selenium.webdriver.remote.webelement import WebElement
+
+from base.utils import Utils
 
 
 class HomePage(SeleniumBase):
@@ -21,5 +21,8 @@ class HomePage(SeleniumBase):
     def get_nav_links_text(self) -> str:
         nav_links = self.get_nav_links()
         nav_links_text = self.get_text_from_webelements(nav_links)
-        return ','.join(nav_links_text)
+        return Utils.join_strings(nav_links_text)
 
+    def get_nav_link_by_name(self, name) -> WebElement:
+        elements = self.get_nav_links()
+        return self.get_elemet_by_text(elements, name)

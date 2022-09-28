@@ -3,6 +3,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
+from selenium.common import StaleElementReferenceException
 
 
 class SeleniumBase:
@@ -41,6 +42,9 @@ class SeleniumBase:
         return self.__wait.until(ec.presence_of_all_elements_located((self.__get_selenium_by(find_by), locator)), locator_name)
 
     def get_text_from_webelements(self, elements: List[WebElement]) -> List[str]:
+        # element_list = []
+        # for element in elements:
+        #     element_list.append(element.text)
         return [element.text for element in elements]
 
     def get_elemet_by_text(self, elements: List[WebElement], name: str) -> WebElement:
