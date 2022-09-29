@@ -10,15 +10,25 @@ class HomePage(SeleniumBase):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
+        #LOCATOR
         self.__NAV_LINKS = 'div.leftColumn > ul > li > a'
-        self.NAV_LINK_TEXT = 'Главная,О магазине,Гарантия,Доставка,Кредит,Онлайн кредит,FAQ,Контакты,O!'
         self.__CATALOG_PRODUCT = '#leftMenu > li'
-        self.CATALOG_EXPECTED_TEXT_PRODUCT = \
-            'Мобильные телефоны,Устройства О!,Аксессуары,Сумки,Часы,SIM-карты O!,Гаджеты,Электросамокаты'
         self.__SEARCH_WRITE = '#topSearchLine > div:nth-child(1) > form:nth-child(1)' \
                             ' > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > input:nth-child(1)'
         self.__CLICK_SEARCH = '#topSearchLine > div:nth-child(1) > form:nth-child(1) > div:nth-child(1)' \
                             ' > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)'
+        self.__GET_ELEMENT_SEARCH = '#right > h3'
+        self.__LANGUAGE_CHOICE = 'li.top-language:nth-child(4) > a:nth-child(1)'
+        self.__GET_ELEMENT_LANGUAGE = 'li.top-language:nth-child(4) > a'
+        self.__CHOICI_CATALOG_PRODUCT = '.slideBox>li>div>a'
+        self.__CHOICI_CATALOGS_PRODUCT = '.slideBox>li>div>a'
+
+        #EXPECTED
+        self.EXPECTED_NAV_LINK_TEXT = 'Главная,О магазине,Гарантия,Доставка,Кредит,Онлайн кредит,FAQ,Контакты,O!'
+        self.EXPECTED_CATALOG_TEXT_PRODUCT = \
+            'Мобильные телефоны,Устройства О!,Аксессуары,Сумки,Часы,SIM-карты O!,Гаджеты,Электросамокаты'
+        self.EXPECTED_GET_SEARCH = 'Товары по запросу: «часы»'
+        self.EXPECTED_GET_CATALOG = 'Новинки,Рассрочка 0-0-6,Флагман'
 
     def get_nav_links(self) -> List[WebElement]:
         return self.are_visible('css', self.__NAV_LINKS, 'Header Navigation Links')
@@ -53,3 +63,21 @@ class HomePage(SeleniumBase):
     def write_search_click_and_clear(self, text):
         element = self.write_search()
         return self.send_keys_custom(element, text)
+
+    def get_search_element(self):
+        return self.is_visible('css', self.__GET_ELEMENT_SEARCH, 'error element')
+
+    def language_choice(self):
+        return self.is_visible('css', self.__LANGUAGE_CHOICE, 'error element')
+
+    def get_language_element(self):
+        return self.is_visible('css', self.__GET_ELEMENT_LANGUAGE, 'error element')
+
+    def catalogs_choice_product(self) -> List[WebElement]:
+        return self.are_visible('css', self.__CHOICI_CATALOG_PRODUCT, 'error element')
+
+    def catalog_choice_product_text(self):
+        catalog_product = self.catalogs_choice_product()
+        catalog_product_text = self.get_text_from_webelements(catalog_product)
+        return Utils.join_strings(catalog_product_text)
+
