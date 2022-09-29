@@ -3,7 +3,6 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.common import StaleElementReferenceException
 
 
 class SeleniumBase:
@@ -50,7 +49,9 @@ class SeleniumBase:
         name = name.lower()
         return [element for element in elements if element.text.lower() == name][0]
 
-    # @staticmethod
-    # def write_search(element, text: str):
-    #     return element.send_keys(text)
-    #
+    @staticmethod
+    def send_keys_custom(element, text: str) -> str:
+        element.click()
+        element.clear()
+        return element.send_keys(text)
+

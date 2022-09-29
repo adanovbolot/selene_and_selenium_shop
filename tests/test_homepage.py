@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from pom.HomePage import HomePage
 
@@ -33,8 +35,7 @@ class TestHomePage:
             home_page_nav.driver.back()
 
     def test_search_write(self):
-        home_page_nav = HomePage(self.driver)
-        home_page_nav.search_product()
-
-
-
+        search_write = HomePage(self.driver)
+        search_write.write_search_click_and_clear('Айфон')
+        search_write.click_search().click()
+        time.sleep(4)

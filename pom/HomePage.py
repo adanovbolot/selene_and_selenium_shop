@@ -1,8 +1,7 @@
 from typing import List
-import pytest
+from selenium.webdriver.common.by import By
 from base.seleniumbase import SeleniumBase
 from selenium.webdriver.remote.webelement import WebElement
-
 from base.utils import Utils
 
 
@@ -14,8 +13,12 @@ class HomePage(SeleniumBase):
         self.__NAV_LINKS = 'div.leftColumn > ul > li > a'
         self.NAV_LINK_TEXT = 'Главная,О магазине,Гарантия,Доставка,Кредит,Онлайн кредит,FAQ,Контакты,O!'
         self.__CATALOG_PRODUCT = '#leftMenu > li'
-        self.CATALOG_EXPECTED_TEXT_PRODUCT = 'Мобильные телефоны,Устройства О!,Аксессуары,Сумки,Часы,SIM-карты O!,Гаджеты,Электросамокаты'
-        self.__SEARCH = '//input[@id="searchQuery"]'
+        self.CATALOG_EXPECTED_TEXT_PRODUCT = \
+            'Мобильные телефоны,Устройства О!,Аксессуары,Сумки,Часы,SIM-карты O!,Гаджеты,Электросамокаты'
+        self.__SEARCH_WRITE = '#topSearchLine > div:nth-child(1) > form:nth-child(1)' \
+                            ' > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > input:nth-child(1)'
+        self.__CLICK_SEARCH = '#topSearchLine > div:nth-child(1) > form:nth-child(1) > div:nth-child(1)' \
+                            ' > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)'
 
     def get_nav_links(self) -> List[WebElement]:
         return self.are_visible('css', self.__NAV_LINKS, 'Header Navigation Links')
@@ -41,6 +44,12 @@ class HomePage(SeleniumBase):
         elements = self.get_catalog_product()
         return self.get_elemet_by_text(elements, name)
 
-    def search_product(self):
-        return self.is_present('xpath', self.__SEARCH, 'False')
+    def write_search(self):
+        return self.is_visible('css', self.__SEARCH_WRITE, 'error element')
 
+    def click_search(self):
+        return self.is_visible('css', self.__CLICK_SEARCH, 'error element')
+
+    def write_search_click_and_clear(self, text):
+        element = self.write_search()
+        return self.send_keys_custom(element, text)
