@@ -8,4 +8,5 @@ pytest.ini
 pages_stop
 stop_tests
 geckodriver.log
-
+allure-report
+allure-results
