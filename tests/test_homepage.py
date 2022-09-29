@@ -49,12 +49,14 @@ class TestHomePage:
         get_language_element = language.get_language_element().text
         assert get_language_element == 'RU', f"ВЕРНУЛ: {get_language_element}"
 
-    def test_catalog_choice_text(self):
-        catalog_text = HomePage(self.driver)
-        get_catalog_text = catalog_text.catalog_choice_product_text()
-        assert get_catalog_text == catalog_text.EXPECTED_GET_CATALOG, f'ВЕРНУЛ: {get_catalog_text}'
+    @pytest.mark.skip
+    def test_catalog_type_text(self):
+        catalog_type_text = HomePage(self.driver)
+        result_catalog_type_text = catalog_type_text.catalog_type_get_text()
+        assert result_catalog_type_text == catalog_type_text.EXPECTED_GET_CATALOG, f"ВЕРНУЛ: {result_catalog_type_text}"
 
-    def test_catalog_click(self):
-        catalog_element = HomePage(self.driver)
+    def test_catalog_type_click(self):
+        catalog_type_click = HomePage(self.driver)
         for index in range(3):
-            catalog_element.catalogs_choice_product()[index].click()
+            self.driver.execute_script("window.scrollBy(0, 150);")
+            catalog_type_click.catalog_type()[index].click()
