@@ -1,5 +1,5 @@
 from typing import List
-from selenium.webdriver.common.by import By
+import allure
 from base.seleniumbase import SeleniumBase
 from selenium.webdriver.remote.webelement import WebElement
 from base.utils import Utils
@@ -29,6 +29,7 @@ class HomePage(SeleniumBase):
         self.EXPECTED_GET_SEARCH = 'Товары по запросу: «часы»'
         self.EXPECTED_GET_CATALOG = 'Новинки,Рассрочка 0-0-6,Флагман'
 
+    @allure.step('locator элементов "Заголовка"')
     def get_nav_links(self) -> List[WebElement]:
         return self.are_visible('css', self.__NAV_LINKS, 'Header Navigation Links')
 
@@ -41,6 +42,7 @@ class HomePage(SeleniumBase):
         elements = self.get_nav_links()
         return self.get_elemet_by_text(elements, name)
 
+    @allure.step('locator элементов "Категории"')
     def get_catalog_product(self) -> List[WebElement]:
         return self.are_visible('css', self.__CATALOG_PRODUCT, 'Header Navigation Links')
 
@@ -53,6 +55,7 @@ class HomePage(SeleniumBase):
         elements = self.get_catalog_product()
         return self.get_elemet_by_text(elements, name)
 
+    @allure.step('locator элемента "Поисковик"')
     def write_search(self):
         return self.is_visible('css', self.__SEARCH_WRITE, 'error element')
 
@@ -66,6 +69,7 @@ class HomePage(SeleniumBase):
     def get_search_element(self):
         return self.is_visible('css', self.__GET_ELEMENT_SEARCH, 'error element')
 
+    @allure.step('locator элемента "Языковые изменения"')
     def language_choice(self):
         return self.is_visible('css', self.__LANGUAGE_CHOICE, 'error element')
 
@@ -75,6 +79,7 @@ class HomePage(SeleniumBase):
     def catalog_type(self) -> List[WebElement]:
         return self.are_visible('css', self.__CATALOG_TYPE, 'error element')
 
+    @allure.step('locator элемента "Список возможностей"')
     def catalog_type_get_text(self) -> str:
         catalog_type = self.catalog_type()
         catalog_type_texts = self.get_text_from_webelements(catalog_type)

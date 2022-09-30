@@ -3,14 +3,10 @@ import pytest
 from pom.HomePage import HomePage
 
 
+@allure.step('Aвто тесты главной страницы сайта')
 @pytest.mark.usefixtures('setup')
 class TestHomePage:
-    @allure.description('''
-    Цель: получить все данные, из списка Header
-    действия:1.получить элементы
-             2.полученные элементы изменить на string
-             3.сравнить данные которые получил, и с которыми хочу сравнить
-    ''')
+
     @allure.title('Проверка на получение данных виде strings "Header"')
     @pytest.mark.nav_links_text
     def test_nav_links_text(self):
@@ -18,6 +14,9 @@ class TestHomePage:
         actual_links = home_page_nav.get_nav_links_text()
         expected_links = home_page_nav.EXPECTED_NAV_LINK_TEXT
         assert actual_links == expected_links, f"\nВЕРНУЛ:\n {actual_links}"
+        allure.dynamic.description(f'Цель: получить все данные, из списка Header'
+                                   f'Должен вернуть список: {home_page_nav.EXPECTED_NAV_LINK_TEXT}')
+
 
     @allure.title('Проверка ссылок на нажатия "Header"')
     @pytest.mark.click_nav_links

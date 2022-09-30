@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Игнорируемые тесты",
+    "matchedStatuses": ["пропущено"]
+  },
+  {
+    "name": "Проблемы с инфраструктурой",
+    "matchedStatuses": ["сломан", "сбой"],
+    "messageRegex": ".*signOut.*"
+  },
+  {
+    "name": "Устаревшие тесты",
+    "matchedStatuses": ["сломан"],
+    "traceRegex": ".*FileNotFoundException.*"
+  },
+  {
+    "name": "Дефекты товара",
+    "matchedStatuses": ["не удалось"]
+  },
+  {
+    "name": "Проверить дефекты",
+    "matchedStatuses": ["сломан"]
+  }
+]
