@@ -33,11 +33,14 @@ class HomePage(SeleniumBase):
     def get_nav_links(self) -> List[WebElement]:
         return self.are_visible('css', self.__NAV_LINKS, 'Header Navigation Links')
 
+    @allure.step('Принимать список виде "str"')
     def get_nav_links_text(self) -> str:
         nav_links = self.get_nav_links()
         nav_links_text = self.get_text_from_webelements(nav_links)
         return Utils.join_strings(nav_links_text)
 
+    @allure.step('Элементы по индексу'
+                 'для взаимодействия')
     def get_nav_link_by_name(self, name) -> WebElement:
         elements = self.get_nav_links()
         return self.get_elemet_by_text(elements, name)
@@ -46,11 +49,13 @@ class HomePage(SeleniumBase):
     def get_catalog_product(self) -> List[WebElement]:
         return self.are_visible('css', self.__CATALOG_PRODUCT, 'Header Navigation Links')
 
+    @allure.step('Принимать список виде "str"')
     def get_catalog_product_text(self) -> str:
         catalog_products = self.get_catalog_product()
         catalog_products_text = self.get_text_from_webelements(catalog_products)
         return Utils.join_strings(catalog_products_text)
 
+    @allure.step('Элементы по индексу, для взаимодействия')
     def get_catalog_by_name(self, name) -> WebElement:
         elements = self.get_catalog_product()
         return self.get_elemet_by_text(elements, name)
@@ -59,13 +64,16 @@ class HomePage(SeleniumBase):
     def write_search(self):
         return self.is_visible('css', self.__SEARCH_WRITE, 'error element')
 
+    @allure.step('Нажатие на кнопку')
     def click_search(self):
         return self.is_visible('css', self.__CLICK_SEARCH, 'error element')
 
+    @allure.step('Написать в поле поисковика')
     def write_search_click_and_clear(self, text):
         element = self.write_search()
         return self.send_keys_custom(element, text)
 
+    @allure.step('Элемент полученный от поисковика')
     def get_search_element(self):
         return self.is_visible('css', self.__GET_ELEMENT_SEARCH, 'error element')
 
@@ -73,13 +81,15 @@ class HomePage(SeleniumBase):
     def language_choice(self):
         return self.is_visible('css', self.__LANGUAGE_CHOICE, 'error element')
 
+    @allure.step('locator элемента "Языковые изменения"')
     def get_language_element(self):
         return self.is_visible('css', self.__GET_ELEMENT_LANGUAGE, 'error element')
 
+    @allure.step('locator элемента "Каталог"')
     def catalog_type(self) -> List[WebElement]:
         return self.are_visible('css', self.__CATALOG_TYPE, 'error element')
 
-    @allure.step('locator элемента "Список возможностей"')
+    @allure.step('Принимать список виде "str"')
     def catalog_type_get_text(self) -> str:
         catalog_type = self.catalog_type()
         catalog_type_texts = self.get_text_from_webelements(catalog_type)
