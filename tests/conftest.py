@@ -1,30 +1,38 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as chrome_options
-from selenium.webdriver.support.event_firing_webdriver import EventFiringWebDriver
-# from abstract.selenium_listener import MyListener
+
+
+def pytest_addoption(parser):
+    parser.addoption('--browser', action='store', default='firefox', choices=["chrome", "firefox", "opera"])
+    parser.addoption('--executor', action='store', default='192.168.1.230')
+    parser.addoption('--br_version', action='store', default='')
 
 
 @pytest.fixture
-def get_chrome_options():
-    options = chrome_options()
-    options.add_argument('chrome')  # Use headless if you do not need a browser UI
-    options.add_argument('--start-maximized')
-    options.add_argument('--window-size=1650,900')
-    return options
+def get_webdriver(request):
+    browser = request.config.getoption("--browser")
+    executor = request.config.getoption('--executor')
+    br_version = request.config.getoption('--br_version')
 
-
-@pytest.fixture
-def get_webdriver(get_chrome_options):
-    options = get_chrome_options
-    driver = webdriver.Chrome(options=options)
+    capabilities = {
+        "browserName": browser,
+        "browserVersion": br_version,
+        "selenoid:options": {
+            "enableVNC": False,
+            "enableVideo": False
+        }
+    }
+    driver = webdriver.Remote(
+        command_executor=f'http://{executor}:4444/wd/hub',
+        desired_capabilities=capabilities,
+    )
     return driver
 
 
 @pytest.fixture(scope='function')
 def setup(request, get_webdriver):
     driver = get_webdriver
-    # driver = EventFiringWebDriver(driver, MyListener())
     url = 'https://ostore.kg/'
     if request.cls is not None:
         request.cls.driver = driver
