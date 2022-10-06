@@ -1,0 +1,4 @@
+venv
+*.md
+__pycach__
+.pytest_cache
