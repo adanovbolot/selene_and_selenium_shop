@@ -3,4 +3,4 @@ pytest tests/* --alluredir=allure --clean-alluredir
 cp environment.properties ./allure/environment.properties
 cp category.json ./allure/category.json
 
-docker cp $(docker ps -a -q | head -1):
+docker cp (docker ps -a -q | head -1):
