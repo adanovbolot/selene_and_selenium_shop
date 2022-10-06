@@ -23,7 +23,7 @@ class HomePage(SeleniumBase):
         self.__CATALOG_TYPE = '.slideBox>li>div>a'
 
         #EXPECTED
-        self.EXPECTED_NAV_LINK_TEXT = 'Главная,О магазине,Гарантия,Доставка,Кредит,Онлайн кредит,FAQ,Контакты,O!'
+        self.EXPECTED_NAV_LINK_TEXT = 'Главная,О магазине,Гарантия,Доставка,Кредит,Онлайн кредит,Вопрос-ответ,Контакты,O!'
         self.EXPECTED_CATALOG_TEXT_PRODUCT = \
             'Мобильные телефоны,Устройства О!,Аксессуары,Сумки,Часы,SIM-карты O!,Гаджеты,Электросамокаты'
         self.EXPECTED_GET_SEARCH = 'Товары по запросу: «часы»'

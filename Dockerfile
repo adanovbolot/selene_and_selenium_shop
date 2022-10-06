@@ -1,11 +1,15 @@
 FROM python:3.8-alpine
-WORKDIR /app
-COPY requirements.txt .
 
-RUN pip install -U pip
+LABEL "channel"="solveme"
+LABEL "creator"="solme community"
 
-RUN pip install -r requirements.txt
+
+WORKDIR ./usr/lessons
 
 COPY . .
 
-CMD ["pytest", "tests/test_homepage.py", "-n 3"]
+RUN pip install -U pip && pip install -r requirements.txt
+
+
+CMD pytest -s -v tests/test_homepage.py
+
