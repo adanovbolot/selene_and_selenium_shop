@@ -19,7 +19,7 @@ def get_webdriver(request):
         "browserName": browser,
         "browserVersion": br_version,
         "selenoid:options": {
-            "enableVNC": False,
+            "enableVNC": True,
             "enableVideo": False
         }
     }
