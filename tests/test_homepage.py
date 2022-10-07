@@ -5,7 +5,7 @@ from pom.HomePage import HomePage
 
 @pytest.mark.usefixtures('setup')
 class TestHomePage:
-
+    @pytest.mark.skip
     @allure.title('Проверка на получение данных виде strings "Header"')
     @pytest.mark.nav_links_text
     def test_nav_links_text(self):
@@ -16,7 +16,7 @@ class TestHomePage:
         allure.dynamic.description(f'Цель: получить все данные, из списка Header\n'
                                    f'Должен вернуть список: {home_page_nav.EXPECTED_NAV_LINK_TEXT}')
 
-
+    @pytest.mark.skip
     @allure.title('Проверка ссылок на нажатия "Header"')
     @pytest.mark.click_nav_links
     def test_click_nav_links(self):
@@ -24,6 +24,7 @@ class TestHomePage:
         for index in range(9):
             home_page_nav.get_nav_links()[index].click()
 
+    @pytest.mark.skip
     @allure.title('Проверка на получение данных виде string "Категории"')
     @pytest.mark.catalog_product_text
     def test_catalog_product_text(self):
@@ -32,6 +33,7 @@ class TestHomePage:
         expected_links = home_page_nav.EXPECTED_CATALOG_TEXT_PRODUCT
         assert actual_catalog_products == expected_links, f"\nВЕРНУЛ: \n {actual_catalog_products}"
 
+    @pytest.mark.skip
     @allure.title('Проверка ссылок на нажатия "Категории"')
     @pytest.mark.click_catalog_product
     def test_click_catalog_product(self):
@@ -40,6 +42,7 @@ class TestHomePage:
             home_page_nav.get_catalog_product()[index].click()
             home_page_nav.driver.back()
 
+    @pytest.mark.skip
     @allure.title('Проверка поисковика на получение данных, и проверка данных полученных по запросу "Поисковик"')
     @pytest.mark.search_write
     def test_search_write(self):
@@ -49,6 +52,7 @@ class TestHomePage:
         get_search_element = search_write.get_search_element().text
         assert get_search_element == search_write.EXPECTED_GET_SEARCH, f"ВЕРНУЛ: {get_search_element}"
 
+    @pytest.mark.skip
     @allure.title('Проверка на изменение языка "language"')
     @pytest.mark.language_choice
     def test_language_choice(self):
@@ -57,6 +61,7 @@ class TestHomePage:
         get_language_element = language.get_language_element().text
         assert get_language_element == 'RU', f"ВЕРНУЛ: {get_language_element}"
 
+    @pytest.mark.skip
     @allure.title('Проверка на получение данных виде strings "Под категории"')
     @pytest.mark.catalog_type_text
     def test_catalog_type_text(self):
