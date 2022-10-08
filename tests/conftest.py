@@ -1,5 +1,7 @@
+import os
 import pytest
 from selenium import webdriver
+import json
 
 
 def pytest_addoption(parser):
@@ -37,3 +39,42 @@ def setup(request, get_webdriver):
     driver.get(url)
     yield driver
     driver.quit()
+
+
+@pytest.fixture(autouse=True)
+def create_allure_env():
+    environment = ['Browser=Chrome\n', 'Browser.Version=89.0.4389.128\n', 'Stand=Test\n', 'python.Version=3.7.9\n']
+    with open('allure/environment.properties', 'w+') as outfile:
+        for listitem in environment:
+            outfile.write(listitem)
+
+
+@pytest.fixture(autouse=True)
+def create_allure_category():
+    category = [
+      {
+        "name": "Игнорируемые тесты",
+        "matchedStatuses": ["пропущено"]
+      },
+      {
+        "name": "Проблемы с инфраструктурой",
+        "matchedStatuses": ["сломан", "сбой"],
+        "messageRegex": ".*signOut.*"
+      },
+      {
+        "name": "Устаревшие тесты",
+        "matchedStatuses": ["сломан"],
+        "traceRegex": ".*FileNotFoundException.*"
+      },
+      {
+        "name": "Дефекты товара",
+        "matchedStatuses": ["не удалось"]
+      },
+      {
+        "name": "Проверить дефекты",
+        "matchedStatuses": ["сломан"]
+      }
+    ]
+    with open('allure/category.json', 'w') as outfile:
+        json.dump(category, outfile)
+
