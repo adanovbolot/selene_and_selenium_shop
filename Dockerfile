@@ -13,5 +13,5 @@ RUN pip install -U pip && pip install -r requirements.txt
 
 COPY . .
 
-CMD pytest -s -v tests/test_homepage.py --alluredir=allure && allure serve allure
+CMD pytest -s -v tests/test_homepage.py --alluredir=allure && allure serve allure -n 4
 

@@ -9,7 +9,7 @@ class SeleniumBase:
 
     def __init__(self, driver):
         self.driver = driver
-        self.__wait = WebDriverWait(driver, 15)
+        self.__wait = WebDriverWait(driver, 20)
 
     def __get_selenium_by(self, find_by: str) -> dict:
         find_by = find_by.lower()

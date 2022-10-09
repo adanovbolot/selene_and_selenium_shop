@@ -1,6 +1,8 @@
 import pytest
 from selenium import webdriver
 import json
+import os
+
 
 def pytest_addoption(parser):
     parser.addoption('--browser', action='store', default='firefox', choices=["chrome", "firefox"])
@@ -25,6 +27,7 @@ def get_webdriver(request):
         command_executor=f'http://{executor}:4444/wd/hub',
         desired_capabilities=capabilities
     )
+    # driver = webdriver.Firefox()
     return driver
 
 
@@ -49,6 +52,8 @@ def create_allure_env():
 
 @pytest.fixture(autouse=True)
 def create_allure_category():
+    if not os.path.isdir("allure"):
+        os.mkdir("allure")
     category = [{
         "name": "Skipped tests",
         "messageRegex": ".*",
