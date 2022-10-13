@@ -1,4 +1,6 @@
 from typing import List
+
+from selenium.webdriver import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
@@ -55,3 +57,7 @@ class SeleniumBase:
         element.clear()
         return element.send_keys(text)
 
+    @staticmethod
+    def enter_button(sumbit):
+        sumbit.send_keys(Keys.ENTER)
+        return sumbit
