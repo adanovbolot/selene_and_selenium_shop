@@ -4,7 +4,7 @@ import json
 
 
 def pytest_addoption(parser):
-    parser.addoption('--browser', action='store', default='firefox', choices=["chrome", "firefox"])
+    parser.addoption('--browser', action='store', default='chrome', choices=["chrome", "firefox"])
     parser.addoption('--executor', action='store', default='192.168.1.230')
     parser.addoption('--br_version', action='store', default='')
 
